@@ -1,5 +1,5 @@
-hello Github
+Hello Everyone
 <br>
 This is My First Github Repository
 <br>
-This is My Website That Shows Multiple images
+This Website Shows Multiple images
