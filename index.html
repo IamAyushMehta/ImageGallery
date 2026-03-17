@@ -3,798 +3,98 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Wanderframe — Nature Gallery</title>
+
+    <title>Responsive Image Gallery</title>
+
+    <!-- Bootstrap CSS -->
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Raleway:wght@300;400;500;600&display=swap"
-      rel="stylesheet"
-    />
+
     <style>
-      :root {
-        --cream: #f5f0e8;
-        --charcoal: #1a1a1a;
-        --stone: #8b8378;
-        --moss: #4a5240;
-        --sand: #c9b99a;
-        --accent: #b5763a;
-      }
-
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-
       body {
-        background-color: var(--charcoal);
-        color: var(--cream);
-        font-family: "Raleway", sans-serif;
-        font-weight: 300;
-        min-height: 100vh;
-        overflow-x: hidden;
+        background-color: #f8f9fa;
       }
 
-      /* Grain overlay */
-      body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-        pointer-events: none;
-        z-index: 9999;
-        opacity: 0.35;
-      }
-
-      /* ── Header ── */
-      .site-header {
-        padding: 3.5rem 0 2rem;
-        text-align: center;
-        position: relative;
-      }
-      .site-header::after {
-        content: "";
-        display: block;
-        width: 60px;
-        height: 1px;
-        background: var(--accent);
-        margin: 1.5rem auto 0;
-      }
-      .site-header .eyebrow {
-        font-family: "Raleway", sans-serif;
-        font-size: 0.68rem;
-        letter-spacing: 0.35em;
-        text-transform: uppercase;
-        color: var(--accent);
-        margin-bottom: 0.8rem;
-        animation: fadeUp 0.6s ease both;
-      }
-      .site-header h1 {
-        font-family: "Cormorant Garamond", serif;
-        font-size: clamp(3rem, 8vw, 6rem);
-        font-weight: 300;
-        letter-spacing: -0.01em;
-        line-height: 0.9;
-        animation: fadeUp 0.6s 0.1s ease both;
-      }
-      .site-header h1 em {
-        font-style: italic;
-        color: var(--sand);
-      }
-      .site-header .subtitle {
-        font-size: 0.8rem;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: var(--stone);
-        margin-top: 1.2rem;
-        animation: fadeUp 0.6s 0.2s ease both;
-      }
-
-      /* ── Filter Bar ── */
-      .filter-bar {
-        display: flex;
-        justify-content: center;
-        gap: 0.5rem;
-        flex-wrap: wrap;
-        padding: 1.5rem 1rem 0;
-        animation: fadeUp 0.6s 0.3s ease both;
-      }
-      .filter-btn {
-        background: transparent;
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        color: var(--stone);
-        font-family: "Raleway", sans-serif;
-        font-size: 0.7rem;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        padding: 0.45rem 1.2rem;
-        cursor: pointer;
-        transition: all 0.25s ease;
-        border-radius: 0;
-      }
-      .filter-btn:hover,
-      .filter-btn.active {
-        background: var(--accent);
-        border-color: var(--accent);
-        color: var(--cream);
-      }
-
-      /* ── Gallery Grid ── */
-      .gallery-section {
-        padding: 3rem 0 5rem;
-      }
-
-      .gallery-item {
-        padding: 0.45rem;
-        animation: fadeUp 0.5s ease both;
-      }
-      .gallery-item:nth-child(1) {
-        animation-delay: 0.05s;
-      }
-      .gallery-item:nth-child(2) {
-        animation-delay: 0.1s;
-      }
-      .gallery-item:nth-child(3) {
-        animation-delay: 0.15s;
-      }
-      .gallery-item:nth-child(4) {
-        animation-delay: 0.2s;
-      }
-      .gallery-item:nth-child(5) {
-        animation-delay: 0.25s;
-      }
-      .gallery-item:nth-child(6) {
-        animation-delay: 0.3s;
-      }
-      .gallery-item:nth-child(7) {
-        animation-delay: 0.35s;
-      }
-      .gallery-item:nth-child(8) {
-        animation-delay: 0.4s;
-      }
-      .gallery-item:nth-child(9) {
-        animation-delay: 0.45s;
-      }
-      .gallery-item:nth-child(10) {
-        animation-delay: 0.5s;
-      }
-      .gallery-item:nth-child(11) {
-        animation-delay: 0.55s;
-      }
-      .gallery-item:nth-child(12) {
-        animation-delay: 0.6s;
-      }
-
-      .gallery-card {
-        position: relative;
-        overflow: hidden;
-        cursor: pointer;
-        display: block;
-      }
-
-      .gallery-card img {
+      .gallery img {
         width: 100%;
-        height: 260px;
+        height: 250px;
         object-fit: cover;
-        display: block;
+        border-radius: 12px;
         transition:
-          transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-          filter 0.65s ease;
-        filter: saturate(0.85) brightness(0.92);
+          transform 0.4s,
+          box-shadow 0.4s;
       }
 
-      /* Tall cards for featured items */
-      .gallery-item.tall .gallery-card img {
-        height: 380px;
+      .gallery img:hover {
+        transform: scale(1.07);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
       }
 
-      .gallery-card:hover img {
-        transform: scale(1.06);
-        filter: saturate(1.1) brightness(1);
-      }
-
-      /* Overlay */
-      .gallery-overlay {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          to top,
-          rgba(10, 10, 10, 0.82) 0%,
-          rgba(10, 10, 10, 0.1) 55%,
-          transparent 100%
-        );
-        opacity: 0;
-        transition: opacity 0.4s ease;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        padding: 1.4rem 1.2rem;
-      }
-      .gallery-card:hover .gallery-overlay {
-        opacity: 1;
-      }
-
-      .overlay-category {
-        font-size: 0.62rem;
-        letter-spacing: 0.3em;
-        text-transform: uppercase;
-        color: var(--accent);
-        margin-bottom: 0.3rem;
-        transform: translateY(8px);
-        transition: transform 0.35s 0.05s ease;
-      }
-      .gallery-card:hover .overlay-category {
-        transform: translateY(0);
-      }
-
-      .overlay-title {
-        font-family: "Cormorant Garamond", serif;
-        font-size: 1.35rem;
-        font-weight: 400;
-        line-height: 1.2;
-        color: var(--cream);
-        transform: translateY(10px);
-        transition: transform 0.35s 0.1s ease;
-      }
-      .gallery-card:hover .overlay-title {
-        transform: translateY(0);
-      }
-
-      .overlay-location {
-        font-size: 0.68rem;
-        letter-spacing: 0.12em;
-        color: var(--stone);
-        margin-top: 0.35rem;
-        transform: translateY(10px);
-        transition: transform 0.35s 0.15s ease;
-      }
-      .gallery-card:hover .overlay-location {
-        transform: translateY(0);
-      }
-
-      /* Corner tag */
-      .corner-tag {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        background: rgba(181, 118, 58, 0.9);
-        color: #fff;
-        font-size: 0.58rem;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        padding: 0.28rem 0.6rem;
-        backdrop-filter: blur(4px);
-      }
-
-      /* ── Lightbox ── */
-      .lightbox-overlay {
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.93);
-        z-index: 1000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.3s ease;
-      }
-      .lightbox-overlay.open {
-        opacity: 1;
-        pointer-events: all;
-      }
-      .lightbox-inner {
-        position: relative;
-        max-width: 90vw;
-        max-height: 90vh;
-        text-align: center;
-      }
-      .lightbox-inner img {
-        max-width: 80vw;
-        max-height: 75vh;
-        object-fit: contain;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        transform: scale(0.95);
-        transition: transform 0.3s ease;
-      }
-      .lightbox-overlay.open .lightbox-inner img {
-        transform: scale(1);
-      }
-      .lightbox-caption {
-        margin-top: 1rem;
-        font-family: "Cormorant Garamond", serif;
-        font-size: 1.1rem;
-        font-style: italic;
-        color: var(--sand);
-      }
-      .lightbox-close {
-        position: absolute;
-        top: -2.5rem;
-        right: 0;
-        background: none;
-        border: none;
-        color: var(--stone);
-        font-size: 1.4rem;
-        cursor: pointer;
-        transition: color 0.2s;
-      }
-      .lightbox-close:hover {
-        color: var(--cream);
-      }
-      .lb-nav {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background: rgba(255, 255, 255, 0.07);
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        color: var(--cream);
-        font-size: 1.2rem;
-        width: 2.8rem;
-        height: 2.8rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: background 0.2s;
-      }
-      .lb-nav:hover {
-        background: rgba(181, 118, 58, 0.5);
-      }
-      .lb-prev {
-        left: -4rem;
-      }
-      .lb-next {
-        right: -4rem;
-      }
-
-      /* ── Footer ── */
-      .site-footer {
-        text-align: center;
-        padding: 2rem 0 3rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.06);
-      }
-      .site-footer p {
-        font-size: 0.7rem;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: var(--stone);
-      }
-      .site-footer span {
-        color: var(--accent);
-        font-style: italic;
-        font-family: "Cormorant Garamond", serif;
-        font-size: 0.85rem;
-        letter-spacing: 0.05em;
-      }
-
-      /* ── Animations ── */
-      @keyframes fadeUp {
-        from {
-          opacity: 0;
-          transform: translateY(22px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      /* Responsive height tweaks */
-      @media (max-width: 768px) {
-        .gallery-card img {
-          height: 200px;
-        }
-        .gallery-item.tall .gallery-card img {
-          height: 260px;
-        }
-        .lb-prev {
-          left: -2.5rem;
-        }
-        .lb-next {
-          right: -2.5rem;
-        }
-      }
-      @media (max-width: 576px) {
-        .gallery-card img {
-          height: 180px;
-        }
-        .lightbox-inner img {
-          max-width: 95vw;
-        }
-        .lb-prev,
-        .lb-next {
-          display: none;
-        }
+      .title {
+        font-weight: bold;
       }
     </style>
   </head>
   <body>
-    <!-- Header -->
-    <header class="site-header">
-      <p class="eyebrow">Curated Collection · 2025</p>
-      <h1>Wander<em>frame</em></h1>
-      <p class="subtitle">A visual journey through the natural world</p>
-    </header>
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#">My Gallery</a>
+      </div>
+    </nav>
 
-    <!-- Filter Bar -->
-    <div class="filter-bar">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="forest">Forest</button>
-      <button class="filter-btn" data-filter="ocean">Ocean</button>
-      <button class="filter-btn" data-filter="mountain">Mountain</button>
-      <button class="filter-btn" data-filter="desert">Desert</button>
-      <button class="filter-btn" data-filter="sky">Sky</button>
+    <!-- Heading -->
+    <div class="container text-center mt-4">
+      <h1 class="title">Nature Gallery</h1>
+      <p class="text-muted">Responsive Image Gallery using Bootstrap Grid</p>
     </div>
 
     <!-- Gallery -->
-    <section class="gallery-section">
-      <div class="container-fluid px-3">
-        <div class="row" id="galleryGrid">
-          <!-- 1 -->
-          <div class="gallery-item col-12 col-sm-6 col-lg-4" data-cat="forest">
-            <div
-              class="gallery-card"
-              data-title="Ancient Canopy"
-              data-loc="Pacific Northwest, USA"
-            >
-              <img
-                src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80"
-                alt="Ancient forest canopy"
-              />
-              <div class="gallery-overlay">
-                <div class="overlay-category">Forest</div>
-                <div class="overlay-title">Ancient Canopy</div>
-                <div class="overlay-location">Pacific Northwest, USA</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- 2 -->
-          <div
-            class="gallery-item col-12 col-sm-6 col-lg-4 tall"
-            data-cat="ocean"
-          >
-            <div
-              class="gallery-card"
-              data-title="Coastal Infinity"
-              data-loc="Algarve, Portugal"
-            >
-              <img
-                src="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=800&q=80"
-                alt="Coastal cliffs and ocean"
-              />
-              <div class="gallery-overlay">
-                <div class="overlay-category">Ocean</div>
-                <div class="overlay-title">Coastal Infinity</div>
-                <div class="overlay-location">Algarve, Portugal</div>
-              </div>
-              <div class="corner-tag">Featured</div>
-            </div>
-          </div>
-
-          <!-- 3 -->
-          <div
-            class="gallery-item col-12 col-sm-6 col-lg-4"
-            data-cat="mountain"
-          >
-            <div
-              class="gallery-card"
-              data-title="Alpine Silence"
-              data-loc="Swiss Alps, Switzerland"
-            >
-              <img
-                src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80"
-                alt="Swiss alpine peaks"
-              />
-              <div class="gallery-overlay">
-                <div class="overlay-category">Mountain</div>
-                <div class="overlay-title">Alpine Silence</div>
-                <div class="overlay-location">Swiss Alps, Switzerland</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- 4 -->
-          <div class="gallery-item col-12 col-sm-6 col-lg-3" data-cat="desert">
-            <div
-              class="gallery-card"
-              data-title="Red Earth"
-              data-loc="Wadi Rum, Jordan"
-            >
-              <img
-                src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800&q=80"
-                alt="Desert sand dunes"
-              />
-              <div class="gallery-overlay">
-                <div class="overlay-category">Desert</div>
-                <div class="overlay-title">Red Earth</div>
-                <div class="overlay-location">Wadi Rum, Jordan</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- 5 -->
-          <div class="gallery-item col-12 col-sm-6 col-lg-3" data-cat="sky">
-            <div
-              class="gallery-card"
-              data-title="Aurora Veil"
-              data-loc="Tromsø, Norway"
-            >
-              <img
-                src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=800&q=80"
-                alt="Northern lights aurora"
-              />
-              <div class="gallery-overlay">
-                <div class="overlay-category">Sky</div>
-                <div class="overlay-title">Aurora Veil</div>
-                <div class="overlay-location">Tromsø, Norway</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- 6 -->
-          <div class="gallery-item col-12 col-sm-6 col-lg-3" data-cat="forest">
-            <div
-              class="gallery-card"
-              data-title="Bamboo Light"
-              data-loc="Arashiyama, Japan"
-            >
-              <img
-                src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80"
-                alt="Bamboo forest"
-              />
-              <div class="gallery-overlay">
-                <div class="overlay-category">Forest</div>
-                <div class="overlay-title">Bamboo Light</div>
-                <div class="overlay-location">Arashiyama, Japan</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- 7 -->
-          <div class="gallery-item col-12 col-sm-6 col-lg-3" data-cat="ocean">
-            <div
-              class="gallery-card"
-              data-title="Tidal Glass"
-              data-loc="Maldives"
-            >
-              <img
-                src="https://images.unsplash.com/photo-1505881402582-c5bc11054f91?w=800&q=80"
-                alt="Crystal clear ocean water"
-              />
-              <div class="gallery-overlay">
-                <div class="overlay-category">Ocean</div>
-                <div class="overlay-title">Tidal Glass</div>
-                <div class="overlay-location">Maldives</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- 8 -->
-          <div
-            class="gallery-item col-12 col-sm-6 col-lg-4 tall"
-            data-cat="mountain"
-          >
-            <div
-              class="gallery-card"
-              data-title="Volcanic Dawn"
-              data-loc="Iceland"
-            >
-              <img
-                src="https://images.unsplash.com/photo-1476610182048-b716b8518aae?w=800&q=80"
-                alt="Volcanic landscape Iceland"
-              />
-              <div class="gallery-overlay">
-                <div class="overlay-category">Mountain</div>
-                <div class="overlay-title">Volcanic Dawn</div>
-                <div class="overlay-location">Iceland</div>
-              </div>
-              <div class="corner-tag">Featured</div>
-            </div>
-          </div>
-
-          <!-- 9 -->
-          <div class="gallery-item col-12 col-sm-6 col-lg-4" data-cat="sky">
-            <div
-              class="gallery-card"
-              data-title="Storm Chorus"
-              data-loc="Great Plains, USA"
-            >
-              <img
-                src="https://images.unsplash.com/photo-1504608524841-42584120d693?w=800&q=80"
-                alt="Storm clouds over plains"
-              />
-              <div class="gallery-overlay">
-                <div class="overlay-category">Sky</div>
-                <div class="overlay-title">Storm Chorus</div>
-                <div class="overlay-location">Great Plains, USA</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- 10 -->
-          <div class="gallery-item col-12 col-sm-6 col-lg-4" data-cat="desert">
-            <div
-              class="gallery-card"
-              data-title="Dune Geometry"
-              data-loc="Sahara, Morocco"
-            >
-              <img
-                src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800&q=80"
-                alt="Sand dunes in Sahara"
-              />
-              <div class="gallery-overlay">
-                <div class="overlay-category">Desert</div>
-                <div class="overlay-title">Dune Geometry</div>
-                <div class="overlay-location">Sahara, Morocco</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- 11 -->
-          <div class="gallery-item col-12 col-sm-6 col-lg-4" data-cat="ocean">
-            <div
-              class="gallery-card"
-              data-title="Wave Sequence"
-              data-loc="Nazaré, Portugal"
-            >
-              <img
-                src="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=800&q=80"
-                alt="Ocean waves"
-              />
-              <div class="gallery-overlay">
-                <div class="overlay-category">Ocean</div>
-                <div class="overlay-title">Wave Sequence</div>
-                <div class="overlay-location">Nazaré, Portugal</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- 12 -->
-          <div class="gallery-item col-12 col-sm-6 col-lg-4" data-cat="forest">
-            <div
-              class="gallery-card"
-              data-title="Misty Understory"
-              data-loc="Daintree, Australia"
-            >
-              <img
-                src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80"
-                alt="Rainforest mist"
-              />
-              <div class="gallery-overlay">
-                <div class="overlay-category">Forest</div>
-                <div class="overlay-title">Misty Understory</div>
-                <div class="overlay-location">Daintree, Australia</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- 13 -->
-          <div class="gallery-item col-12 col-sm-6 col-lg-4" data-cat="sky">
-            <div
-              class="gallery-card"
-              data-title="Alpenglow"
-              data-loc="Dolomites, Italy"
-            >
-              <img
-                src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80"
-                alt="Mountain alpenglow sunset"
-              />
-              <div class="gallery-overlay">
-                <div class="overlay-category">Sky</div>
-                <div class="overlay-title">Alpenglow</div>
-                <div class="overlay-location">Dolomites, Italy</div>
-              </div>
-            </div>
-          </div>
+    <div class="container gallery mt-4">
+      <div class="row g-4">
+        <!-- Image 1 -->
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <img src="images/nature.jpg" />
+          <p class="text-center mt-2">Mountain</p>
         </div>
-        <!-- /.row -->
-      </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="site-footer">
-      <p>
-        Wanderframe Gallery &nbsp;·&nbsp;
-        <span>Where light meets wilderness</span> &nbsp;·&nbsp; 2025
-      </p>
-    </footer>
+        <!-- Image 2 -->
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <img src="images/photo-1448375240586-882707db888b.jpg" />
+          <p class="text-center mt-2">Forest</p>
+        </div>
 
-    <!-- Lightbox -->
-    <div class="lightbox-overlay" id="lightbox">
-      <div class="lightbox-inner">
-        <button class="lightbox-close" id="lbClose">✕</button>
-        <button class="lb-nav lb-prev" id="lbPrev">&#8592;</button>
-        <img src="" alt="" id="lbImg" />
-        <button class="lb-nav lb-next" id="lbNext">&#8594;</button>
-        <p class="lightbox-caption" id="lbCaption"></p>
+        <!-- Image 3 -->
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <img src="images/photo-1476610182048-b716b8518aae.jpg" />
+          <p class="text-center mt-2">River</p>
+        </div>
+
+        <!-- Image 4 -->
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <img src="images/photo-1505118380757-91f5f5632de0.jpg" />
+          <p class="text-center mt-2">Sunset</p>
+        </div>
+
+        <!-- Image 5 -->
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <img src="images/photo-1505881402582-c5bc11054f91.jpg" />
+          <p class="text-center mt-2">Beach</p>
+        </div>
+
+        <!-- Image 6 -->
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <img src="images/photo-1506905925346-21bda4d32df4.jpg" />
+          <p class="text-center mt-2">Waterfall</p>
+        </div>
       </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-      // Filter
-      const filterBtns = document.querySelectorAll(".filter-btn");
-      const items = document.querySelectorAll(".gallery-item");
-
-      filterBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          filterBtns.forEach((b) => b.classList.remove("active"));
-          btn.classList.add("active");
-          const filter = btn.dataset.filter;
-          items.forEach((item) => {
-            const show = filter === "all" || item.dataset.cat === filter;
-            item.style.display = show ? "" : "none";
-          });
-        });
-      });
-
-      // Lightbox
-      const cards = document.querySelectorAll(".gallery-card");
-      const lightbox = document.getElementById("lightbox");
-      const lbImg = document.getElementById("lbImg");
-      const lbCaption = document.getElementById("lbCaption");
-      const lbClose = document.getElementById("lbClose");
-      const lbPrev = document.getElementById("lbPrev");
-      const lbNext = document.getElementById("lbNext");
-      let currentIdx = 0;
-      const visibleCards = () =>
-        [...cards].filter(
-          (c) => c.closest(".gallery-item").style.display !== "none",
-        );
-
-      function openLightbox(card) {
-        const vc = visibleCards();
-        currentIdx = vc.indexOf(card);
-        lbImg.src = card.querySelector("img").src;
-        lbImg.alt = card.querySelector("img").alt;
-        lbCaption.textContent = card.dataset.title + " — " + card.dataset.loc;
-        lightbox.classList.add("open");
-        document.body.style.overflow = "hidden";
-      }
-
-      function navigate(dir) {
-        const vc = visibleCards();
-        currentIdx = (currentIdx + dir + vc.length) % vc.length;
-        const card = vc[currentIdx];
-        lbImg.src = card.querySelector("img").src;
-        lbCaption.textContent = card.dataset.title + " — " + card.dataset.loc;
-      }
-
-      cards.forEach((card) =>
-        card.addEventListener("click", () => openLightbox(card)),
-      );
-      lbClose.addEventListener("click", () => {
-        lightbox.classList.remove("open");
-        document.body.style.overflow = "";
-      });
-      lightbox.addEventListener("click", (e) => {
-        if (e.target === lightbox) {
-          lightbox.classList.remove("open");
-          document.body.style.overflow = "";
-        }
-      });
-      lbPrev.addEventListener("click", (e) => {
-        e.stopPropagation();
-        navigate(-1);
-      });
-      lbNext.addEventListener("click", (e) => {
-        e.stopPropagation();
-        navigate(1);
-      });
-      document.addEventListener("keydown", (e) => {
-        if (!lightbox.classList.contains("open")) return;
-        if (e.key === "Escape") {
-          lightbox.classList.remove("open");
-          document.body.style.overflow = "";
-        }
-        if (e.key === "ArrowLeft") navigate(-1);
-        if (e.key === "ArrowRight") navigate(1);
-      });
-    </script>
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center mt-5 p-3">
+      <p>© 2026 Image Gallery Project | Xavier University Patna</p>
+    </footer>
   </body>
 </html>
